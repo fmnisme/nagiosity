@@ -1,0 +1,27 @@
+Nagiosity
+Quick Install Guide v1.0 July 6 2008
+
+This guide is baed on the following system :
+Debian Etch v4
+Apache2 v2.2.3-4+etch4
+Nagios v3.01
+
+If you use your normal nagios cgi folder (/usr/local/nagios/sbin) expect to be ask for credentials.
+I found that a hassle so I just made a seperate folder.
+
+Create a folder /usr/local/nagios/nagiosity
+Copy the nagiosity scripts to the folder
+Set the owner to be the Nagios process user : chown -R nagios:nagios /usr/local/nagios/nagiosity
+
+Edit the apache config and add the following :
+
+ScriptAlias /nagios/xml "/usr/local/nagios/nagiosity"
+<Directory "/usr/local/nagios/nagiosity">
+   Options ExecCGI
+   AllowOverride None
+   Order allow,deny
+   Allow from all
+</Directory>
+
+Restart apache and test 
+http://<yourhost>/nagios/naiosity/<scriptname>
